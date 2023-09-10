@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <title><%= @note.title %> - Bloco de Notas</title>
+  </head>
+  <body>
+    <%= render partial: "header", locals: { is_home: false, is_showing: true } %>
+
+    <main class="container mt-3">
+      <div class="alert alert-success" id="notice">
+        <%= notice %>
+      </div>
+
+      <h1><%= @note.title %></h1>
+      <p class="note-content"><%= @note.content %></p>
+
+    </main>
+
+    <script>
+      if (!document.getElementById("notice").innerText) {
+        document.getElementById("notice").classList.add("d-none");
+      } else {
+        setTimeout(() => {
+          document.getElementById("notice").style.opacity = "0";
+          setTimeout(() => {
+            document.getElementById("notice").classList.add("d-none");
+          }, 300);
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>

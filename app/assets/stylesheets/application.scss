@@ -1,0 +1,32 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+
+    margin: 0;
+    padding: 0;
+}
+
+.button_to {
+    display: inline-block;
+}
+
+.note-content {
+    white-space: pre;
+}
+
+.alert {
+    transition: display .3s, opacity .3s;
+}
+
+.card-text {
+    white-space: pre;
+    overflow: hidden;
+    max-height: 100px;
+}

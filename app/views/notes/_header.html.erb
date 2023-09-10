@@ -1,0 +1,24 @@
+<header class="navbar bg-light">
+    <nav class="container">
+        <%= link_to "Bloco de Notas", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav">
+            <% if is_home %>
+                <li class="nav-item">
+                    <%= link_to new_path, class: "btn btn-primary" do %>
+                        <%= bootstrap_icon "plus-lg" %>
+                    <% end %>
+                </li>
+            <% end %>
+            <% if is_showing %>
+                <li class="nav-item">
+                    <%= link_to edit_note_path(@note), class: "btn btn-primary" do %>
+                        <%= bootstrap_icon "pencil-square" %>
+                    <% end %>
+                    <%= button_to @note, method: :delete, class: "btn btn-danger" do %>
+                        <%= bootstrap_icon "trash" %>
+                    <% end %>
+                </li>
+            <% end %>
+        </ul>
+    </nav>
+</header>

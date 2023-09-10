@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <title>Criar nota - Bloco de notas</title>
+  </head>
+  <body>
+    <%= render partial: "header", locals: { is_home: false, is_showing: false } %>
+
+    <main class="container mt-3">
+      <h1>Criar nota</h1>
+
+      <%= form_with(model: @note) do |form| %>
+        <% if @note.errors.any? %>
+          <div class="alert alert-danger">
+            <h2><%= pluralize(@note.errors.count, "error") %> não permitiu que a nota seja salva:</h2>
+
+            <ul>
+              <% @note.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label "Título", class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", placeholder: "Dê um título para identificar sua nota (lembre-se que não pode escrever duas notas com o mesmo nome)", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Nota", class: "form-label" %>
+          <%= form.text_area :content, rows: 10, class: "form-control", placeholder: "Escreva aqui seus lembretes, pensamentos ou outras coisas..." %>
+        </div>
+
+        <%= link_to "Voltar", root_path, class: "btn btn-secondary" %>
+        <%= form.submit "Criar", class: "btn btn-primary" %>
+      <% end %>
+    </main>
+  </body>
+</html>

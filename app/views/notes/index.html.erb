@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <title>Página inicial - Bloco de Notas</title>
+  </head>
+  <body>
+    <%= render partial: "header", locals: { is_home: true, is_showing: false } %>
+
+    <main class="container mt-3">
+      <div class="alert alert-success" id="notice">
+        <%= notice %>
+      </div>
+
+      <h1 class="mb-3">Notas</h1>
+
+      <section class="
+        container-fluid
+        d-flex
+        justify-content-center
+        align-items-center
+        flex-column
+      " id="notas">
+        <% @notes.each do |note| %>
+          <article class="card mb-3 w-50" id="<%= dom_id note %>">
+            <main class="card-body">
+              <h5 class="card-title"><%= note.title %></h5>
+              <p class="card-text"><%= note.content %></p>
+              [...]
+            </main>
+            <footer class="card-footer d-flex justify-content-center align-items-center">
+              <%= link_to "Abrir nota", note, class: "btn btn-primary" %>
+            </footer>
+          </article>
+        <% end %>
+      </section>
+
+      <div id="empty-advice" class="alert alert-secondary">
+        Está tão vazio por aqui... Que tal criar uma nova nota? Clique no botão <span class="fw-bold">+</span> para começar.
+      </div>
+    </main>
+
+    <script>
+      if (!document.getElementById("notice").innerText) {
+        document.getElementById("notice").classList.add("d-none");
+      } else {
+        setTimeout(() => {
+          document.getElementById("notice").style.opacity = "0";
+          setTimeout(() => {
+            document.getElementById("notice").classList.add("d-none");
+          }, 300);
+        }, 2500);
+      }
+
+      if (document.getElementById("notas").innerText) {
+        document.getElementById("empty-advice").classList.add("d-none");
+      }
+    </script>
+  </body>
+</html>
